@@ -28,9 +28,10 @@ M1_result = fzero(M1_equ,0);
 M1_lam =2* M1_result / L;
 
 %optimize M1 based on siz e
-M1_2lam = 0.75 *W3; % as minimal as possible so m1=2 lam
+M1_3lam = 0.75 *W3; % as minimal as possible so m1=3 lam
 Vq_test_equ = @(vq_test) (((M1_3lam*un_ch*C_ox*((VDD-VTN)*vq_test-((vq_test*vq_test)/2)))/(L*(1+vq_test/(E_cn*L))))) - ((vnsat*C_ox*W3*(VDD-vq_test-VTN)*(VDD-vq_test-VTN))/(VDD-vq_test-VTN+L*E_cn));
 Vq_test_result = fzero(Vq_test_equ,0.2);
+M1_ans = M1_3lam;
 
 %calculate M2 size based on write requirement, assume pull down the
 %internal node to 0.5V check HW9 Q1
@@ -38,10 +39,20 @@ Vol=0.5;
 M2_equ = @(M2_size) (W3/L)*(un_ch*C_ox/(1+(Vol/(E_cn*L))))*((VDD-VTN)*Vol-Vol*Vol*0.5) - ( (M2_size*vpsat*C_ox*(VDD-VTN)*(VDD-VTN)) / (E_cp*L+VDD-VTN) );
 M2_result = fzero(M2_equ,0);
 
-%optimize M2 based on size , based on assumption ,Vol can be 0V, reduce the
+%optimize M2 based on size , decrase Vq, reduce the
 %size of M2 dramatically, exp to minimum size 
-Vq_test_equ2 = @(vq_test2) (W3/L)*(un_ch*C_ox/(1+(vq_test2/(E_cn*L))))*((VDD-VTN)*vq_test2-vq_test2*vq_test2*0.5) - ( (M1_2lam*vpsat*C_ox*(VDD-VTN)*(VDD-VTN)) / (E_cp*L+VDD-VTN) );
+Vq_test_equ2 = @(vq_test2) (W3/L)*(un_ch*C_ox/(1+(vq_test2/(E_cn*L))))*((VDD-VTN)*vq_test2-vq_test2*vq_test2*0.5) - ( (0.5*W3*vpsat*C_ox*(VDD-VTN)*(VDD-VTN)) / (E_cp*L+VDD-VTN) );
 Vq_test_result2= fzero(Vq_test_equ2,0);
-%M2 = M1 = 2lambda is doable, so M1=M2=M5=M6 = 2lambda = 180nm
+M2_ans = 0.5*W3;
+%M2 = M1 = 2lambda is doable, so M1=M2 = 3lambda = 270nm   M5=M6 = 2lambda = 180nm
 %M3=M4=4lambda = 360nm
 
+%b) Vs calculation and simulation 
+X = sqrt(M1_ans*E_cp/(M2_ans*E_cn));
+Vs = (VDD+VTN*X)/(1+X);
+
+%The requirement for a
+% successful write operation is to swing the internal voltage of the cell past
+% the switching voltage
+% VS of the corresponding inverter. Once the cell
+% switches its state, the wordline can be returned to its low value.
