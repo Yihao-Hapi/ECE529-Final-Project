@@ -44,7 +44,7 @@ M2_result = fzero(M2_equ,0);
 Vq_test_equ2 = @(vq_test2) (W3/L)*(un_ch*C_ox/(1+(vq_test2/(E_cn*L))))*((VDD-VTN)*vq_test2-vq_test2*vq_test2*0.5) - ( (0.5*W3*vpsat*C_ox*(VDD-VTN)*(VDD-VTN)) / (E_cp*L+VDD-VTN) );
 Vq_test_result2= fzero(Vq_test_equ2,0);
 M2_ans = 0.5*W3;
-%M2 = M1 = 2lambda is doable, so M1=M2 = 3lambda = 270nm   M5=M6 = 2lambda = 180nm
+%M2 = M1 = 3lambda is doable, so M1=M2 = 3lambda = 270nm   M5=M6 = 2lambda = 180nm
 %M3=M4=4lambda = 360nm
 
 %b) Vs calculation and simulation 
@@ -56,3 +56,9 @@ Vs = (VDD+VTN*X)/(1+X);
 % the switching voltage
 % VS of the corresponding inverter. Once the cell
 % switches its state, the wordline can be returned to its low value.
+
+%After put it into HSPICE, it not working. We have to increase the size of
+%the M1 M2 to the same with M3 M4 so the internal node will not exceed VTN,
+%explanation will be included
+
+
