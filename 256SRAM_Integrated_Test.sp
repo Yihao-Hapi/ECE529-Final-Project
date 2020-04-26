@@ -4,52 +4,58 @@
 .include /winhomes/yh255/180nm.txt
 
 *passive
-Cb b gnd 0.36p ic=1.8
-Cbbar bbar gnd 0.36p ic=1.8
+Cbit 3 0 0.36p ic=1.8
+Cbitbar 4 0 0.36p ic=1.8
 
 *voltage source
-vw w gnd pwl 0 0 100p 0 100.01p 1.8 3n 1.8 3001p 0 
+*vw w gnd pwl 0 0 100p 0 100.01p 1.8 3n 1.8 3001p 0 
 vdd pwr gnd 1.8
+vpc 5 0
+vword 9 0
+vwrite 6 0
+vwrite_bar 7 0
+vcol 8 0
+vcs 17 0
 
 *SRAM subcircuit initialization
 .subckt sram b bb
-m1 q qbar gnd gnd NMOS l=180n w=360n
-m2 qbar q gnd gnd NMOS l=180n w=360n
-m3 b w q gnd NMOS  l=180n w=360n
-m4 bb w qbar gnd NMOS  l=180n w=360n
-m5 q qbar pwr pwr PMOS l=180n w=180n
-m6 qbar q pwr pwr PMOS l=180n w=180n
+m1 1 2 0 0 NMOS l=180n w=360n
+m2 2 1 0 0 NMOS l=180n w=360n
+m3 b 9 1 0 NMOS  l=180n w=360n
+m4 bb 9 2 0 NMOS  l=180n w=360n
+m5 1 2 10 10 PMOS l=180n w=180n
+m6 2 1 10 10 PMOS l=180n w=180n
 .ends 
 
 *SRAM column 
-sram1 2 3 sram
+sram_cell1 3 4 sram
 
 *Write ckt
-m9 2 v_write 4 4 NMOS 
-m10  3 v_write_bar 4 4 NMOS 
-m11 4 col gnd gnd NMOS
+m7 3 5 10 PMOS 
+m8 4 5 10 PMOS 
+m9 3 6 11 NMOS
+m10 4 7 11 NMOS 
+m11 11 8 0 NMOS 
 
-*pull up ckt
-m7 2 pc pwr pwr PMOS 
-m8 3 pc pwr pwr PMOS 
-
-*differential amplifier
-m12 5 5 pwr pwr PMOS 
-m13 15 5 pwr pwr PMOS 
-m14 5 2 6 6 NMOS 
-m15 15 3 6 6 NMOS 
-m16 6 v_cs gnd gnd NMOS 
+*Read ckt
+m12 12 10 3 PMOS
+m13 13 10 4 PMOS 
+m14 14 12 16 NMOS 
+m15 15 13 16 NMOS 
+m16 14 14 10 PMOS 
+m17 15 14 10 PMOS 
+m18 16 17 0 NMOS 
 
 *OPTION
 .options post probe
 
 *intial node set 
-.nodeset V(q)=0 V(qbar)=1.8
+.nodeset 
 
 *ANALYSIS
 .tran 0.1p 5n uic
 
 *OUTPUT
-.probe tran V(w) V(q) V(qbar) V(b) V(bbar)
+.probe tran V(1) V(2)
  
 .END
