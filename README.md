@@ -43,3 +43,7 @@ of 0.9 V.
 8) As a last step,we need to set the values of the column pull-up transistors of Figure 8.18. They need to pull the bitlines up after a write but before the end of the precharge phase. How big do they need to be? The final difference of the btlines should be less than 10% of the desired read swings to avoid confusing the sense amp. Typically, we make them twice the size of the pull-down devices for a fast precharge. Size these transistors accordingly.
 
 9) CHECK YOUR RESULTS USING SPICE.
+
+
+
+Report: https://www.overleaf.com/5575765823pscybfrzsspw
