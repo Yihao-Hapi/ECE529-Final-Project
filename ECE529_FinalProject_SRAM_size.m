@@ -61,4 +61,37 @@ Vs = (VDD+VTN*X)/(1+X);
 %the M1 M2 to the same with M3 M4 so the internal node will not exceed VTN,
 %explanation will be included
 
+%c)
+I_0 = 0;
+Vq_ss = VTN;
+I_ss = (vnsat*C_ox*W3*(VDD-Vq_ss-VTN)*(VDD-Vq_ss-VTN))/(VDD-Vq_ss-VTN+L*E_cn);
+I_ave = (I_0+I_ss)/2;
 
+%d) Capacitance Calculation
+C_ds = 0.5*10^-15/10^-6; %unit cap per length
+C_wire = 0.2*10^-15/10^-6; %unit cap per length
+C_contact = 1*10^-15; %unit cap
+rnum = 256;
+lambda = 180/2*10^-9;
+W_acc = 4*lambda;
+C_bit = rnum*C_ds*W_acc + C_wire*256*40*lambda + C_contact*rnum/2;
+
+delta_V = 180e-3; 
+C_amp = 50e-15; 
+I_bias = 300e-6; 
+delta_V_amp = 0.9; 
+
+% e) Discharge time
+t_disc = C_bit * delta_V / I_ave; 
+
+% f) Sense amp discharge
+t_disc_amp = C_amp * delta_V_amp / I_bias; 
+
+% From abcdef
+t_read = 0.3674e-9;
+C_bit = 358.4e-15;
+delta_V = 4/5*VDD;
+
+I_sat = C_bit*delta_V/t_read;
+W_pulldown = I_sat/(vnsat*C_ox*(VDD-VTN)^2/(VDD-VTN+E_cn*L)); % W_13, W_14,W_15
+W_pullup = 2*W_pulldown; %W_7, W_8
