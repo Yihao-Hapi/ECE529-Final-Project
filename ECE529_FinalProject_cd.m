@@ -21,7 +21,7 @@ L = 180*10^-7;
 
 %c) Current Estimation
 Vq_0 = 0;
-I_0 = (vnsat*C_ox*W3*(VDD-Vq_0-VTN)*(VDD-Vq_0-VTN))/(VDD-Vq_0-VTN+L*E_cn);
+I_0 = 0;
 Vq_ss = VTN;
 I_ss = (vnsat*C_ox*W3*(VDD-Vq_ss-VTN)*(VDD-Vq_ss-VTN))/(VDD-Vq_ss-VTN+L*E_cn);
 I_ave = (I_0+I_ss)/2;
@@ -33,4 +33,5 @@ C_contact = 1*10^-15; %unit cap
 rnum = 256;
 lambda = 180/2*10^-9;
 W_acc = 4*lambda;
-C_bit = rnum*C_ds*W_acc + C_wire*256*40*lambda + C_contact*rnum/2;
+W_pullup = 50*lambda;
+C_bit = rnum*C_ds*W_acc + 3*C_ds*W_pullup + C_wire*256*40*lambda + C_contact*rnum/2;
