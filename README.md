@@ -7,7 +7,7 @@ Current Progress: a, b, c, d, e, f, g, h :)
 	W13= W14= W15 = 1.2604um
 	W7 = W8 = 2.5208um
 	Cbit = 358.4fF
-  Total discharge time = 0.3674ns
+  Total discharge time = 0.829ns
 
 
  The problem explores cell and IO design issues for a 64K SRAM based on the previous problem.

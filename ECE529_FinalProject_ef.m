@@ -1,6 +1,6 @@
 %% Obtained from part C&D
-I_ave = 2.9679e-04; 
-C_bit = 3.584e-13; 
+I_ave = 9.6178e-05; 
+C_bit = 3.629e-13; 
 
 %% Given values
 delta_V = 180e-3; 
