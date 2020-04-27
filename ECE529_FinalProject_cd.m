@@ -34,4 +34,4 @@ rnum = 256;
 lambda = 180/2*10^-9;
 W_acc = 4*lambda;
 W_pullup = 50*lambda;
-C_bit = rnum*C_ds*W_acc + 3*C_ds*W_pullup + C_wire*256*40*lambda + C_contact*rnum/2;
+C_bit = rnum*C_ds*W_acc + 2*C_ds*W_pullup + C_wire*256*40*lambda + C_contact*rnum/2;
