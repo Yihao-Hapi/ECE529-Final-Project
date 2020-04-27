@@ -1,9 +1,11 @@
 # ECE529 Final Project
  SRAM DESIGN
 
-Current Progress: a, b, c, d, e, f :)
+Current Progress: a, b, c, d, e, f, g, h :)
 	W1 = W2 = W3 = W4 = 360nm
 	W5 = W6 = 180nm
+	W13= W14= W15 = 1.2604um
+	W7 = W8 = 2.5208um
 	Cbit = 358.4fF
   Total discharge time = 0.3674ns
 
