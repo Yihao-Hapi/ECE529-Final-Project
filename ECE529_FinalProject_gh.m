@@ -18,7 +18,7 @@ vg = 1.8;
 L = 180*10^-7;
 
 % From D&E&F
-t_read = 0.839e-9;
+t_read = 0.829e-9;
 C_bit = 369.2e-15;
 
 % Given Value
