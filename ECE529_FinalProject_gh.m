@@ -15,14 +15,18 @@ E_cp = 240000;
 vnsat = 10^7;
 vpsat = 8*10^6;
 vg = 1.8;
-W3 = 2 * 180 *10^-7; %4»Î
 L = 180*10^-7;
 
-% From abcdef
-t_read = 0.3674e-9;
-C_bit = 358.4e-15;
+% From D&E&F
+t_read = 0.839e-9;
+C_bit = 369.2e-15;
+
+% Given Value
 delta_V = 4/5*VDD;
 
+% g)
 I_sat = C_bit*delta_V/t_read;
-W_pulldown = I_sat/(vnsat*C_ox*(VDD-VTN)^2/(VDD-VTN+E_cn*L)); % W_13, W_14,W_15
+W_pulldown = I_sat/(vnsat*C_ox*(VDD-VTN)^2/(VDD-VTN+E_cn*L)); % W_9, W_10, W_11
+
+% h)
 W_pullup = 2*W_pulldown; %W_7, W_8
